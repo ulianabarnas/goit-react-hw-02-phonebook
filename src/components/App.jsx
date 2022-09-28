@@ -25,7 +25,7 @@ export default class App extends Component {
 
   render() {
     const { addContact } = this;
-    const { contacts, filter } = this.state;
+    const { contacts } = this.state;
     return (
       <div>
         <h1>Phonebook</h1>
