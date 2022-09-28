@@ -1,14 +1,14 @@
 import { Component } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as yup from 'yup';
+// import * as yup from 'yup';
 
 const initialValues = {
   name: '',
 }
 
-const schema = yup.object().shape({
-    name: yup.string().required(),
-})
+// const schema = yup.object().shape({
+//     name: yup.string().required(),
+// })
 
 export default class App extends Component {
   state = {
