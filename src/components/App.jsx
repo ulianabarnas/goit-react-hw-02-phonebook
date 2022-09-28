@@ -1,49 +1,39 @@
+import { nanoid } from 'nanoid';
 import { Component } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import * as yup from 'yup';
-
-const initialValues = {
-  name: '',
-}
-
-// const schema = yup.object().shape({
-//     name: yup.string().required(),
-// })
+import ContactForm from './ContactForm/ContactForm';
+import ContactList from './ContactList/ContactList';
+import Filter from './Filter/Filter';
 
 export default class App extends Component {
   state = {
     contacts: [],
-    name: ''
+    filter: '',
+  }
+
+  addContact = (contact) => {
+    this.setState((prevState) => {
+      const newContact = {
+        id: nanoid(),
+        ...contact
+      }
+
+      return {
+        contacts: [...prevState.contacts, newContact]
+      }
+    })
   }
 
   render() {
-    const handleSubmit = (values, {resetForm}) => {
-      console.log(values);
-      resetForm();
-    };
+    const { addContact } = this;
+    const { contacts, filter } = this.state;
     return (
       <div>
-        <h2>Phonebook</h2>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={handleSubmit}>
-          <Form autoComplete='off'>
-            <label htmlFor=''>Name</label>
-            <Field
-              type="text"
-              name="name"
-              // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              // title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              required
-            />
-            <ErrorMessage name="name"/>
-            <button type="submit">Add contact</button>
-          </Form>
-        </Formik>
+        <h1>Phonebook</h1>
+        <ContactForm addContact={addContact}/>
+        
         <h2>Contacts</h2>
-        <ul>
-
-        </ul>
+        <Filter />
+        <ContactList contacts={contacts} />
       </div>
     )
   }
