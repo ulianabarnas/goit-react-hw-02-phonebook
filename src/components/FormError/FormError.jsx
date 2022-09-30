@@ -1,6 +1,6 @@
 import { ErrorMessage } from "formik";
-import styled from "styled-components";
-
+import PropTypes from 'prop-types';
+import { ErrorText } from "./FormError.styles";
 
 export default function FormError({ name }) {
     return (
@@ -11,6 +11,6 @@ export default function FormError({ name }) {
     );
 };
 
-const ErrorText = styled.p`
-    color: red;
-`
+FormError.propTypes = {
+    name: PropTypes.string.isRequired,
+}

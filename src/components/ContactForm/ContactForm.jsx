@@ -1,6 +1,8 @@
-import FormError from 'components/FormError/FormError';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import * as yup from 'yup';
+import PropTypes from 'prop-types';
+import { Button, Input, Label } from './ContactForm.styles';
+import FormError from 'components/FormError/FormError';
 
 const initialValues = {
     name: '',
@@ -19,7 +21,6 @@ const validationSchema = yup.object().shape({
 
 export default function ContactForm({addContact}) {
     const handleSubmit = (values, {resetForm}) => {
-        console.log(values);
         addContact(values);
         resetForm();
     };
@@ -30,24 +31,28 @@ export default function ContactForm({addContact}) {
             validationSchema={validationSchema}
             onSubmit={handleSubmit}>
             <Form autoComplete='off'>
-                <label>Name
-                    <Field
+                <Label>Name 
+                    <Input
                         type="text"
                         name="name"
                     />
-                </label>
+                </Label>
                 <FormError name="name" />
 
-                <label>Number
-                    <Field
+                <Label>Number 
+                    <Input
                         type="tel"
                         name="number"
                     />
-                </label>
+                </Label>
                 <FormError name="number" />
                 
-                <button type="submit">Add contact</button>
+                <Button type="submit">Add contact</Button>
             </Form>
         </Formik>
     )
+}
+
+ContactForm.propTypes = {
+    addContact: PropTypes.func.isRequired,
 }

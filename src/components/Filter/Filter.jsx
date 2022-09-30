@@ -1,10 +1,18 @@
+import PropTypes from 'prop-types';
+import { FilterInput, FilterLabel } from "./Filter.styles";
+
 export default function Filter({value, onChange}) {
   return (
-        <label>Find contacts by name
-          <input
+        <FilterLabel>Find contacts by name
+          <FilterInput
               type="text"
               value={value}
               onChange={onChange} />
-        </label>
+        </FilterLabel>
   )
+}
+
+Filter.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 }
